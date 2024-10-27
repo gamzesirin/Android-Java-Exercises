@@ -1,0 +1,16 @@
+package com.example.tasarimcalismasi;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //R kodlama içinde res klasörünü temsil eder.
+        //@ xml içinde res klasörünü temsil eder.
+    }
+}
