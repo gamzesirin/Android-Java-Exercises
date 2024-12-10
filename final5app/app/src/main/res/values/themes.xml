@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Final5app" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary" type="color">@color/colorPrimary</item>
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimaryDark" type="color">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="Theme.Final5app" parent="Base.Theme.Final5app" />
+</resources>
