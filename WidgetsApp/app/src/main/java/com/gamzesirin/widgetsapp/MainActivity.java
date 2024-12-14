@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SeekBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +14,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.gamzesirin.widgetsapp.databinding.ActivityMainBinding;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,6 +89,49 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+        binding.textView2.setText("SEEKBAR : "+ binding.seekBar.getProgress());// seekbarda açılış default değeri almak
+
+        binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                binding.textView2.setText("SEEKBAR : "+ i);//sekkebarda kaydırmadaki değeri almak
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+        binding.buttonSaat.setOnClickListener(view -> {
+            MaterialTimePicker tp = new MaterialTimePicker.Builder().setTitleText("Saat seçiniz").setTimeFormat(TimeFormat.CLOCK_24H).build();
+            tp.show(getSupportFragmentManager(),"SAAT");
+            tp.addOnPositiveButtonClickListener(view1 ->{
+                binding.saatEditText.setText(tp.getHour()+" "+tp.getMinute());
+            });
+
+        });
+
+        binding.buttonTarih.setOnClickListener(view -> {
+            MaterialDatePicker dp = MaterialDatePicker.Builder.datePicker().setTitleText("Tarih seçiniz").build();
+
+            dp.show(getSupportFragmentManager(),"TARİH");
+            dp.addOnPositiveButtonClickListener(view1->{
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String tarih = df.format(view1);
+                binding.tarihEditText.setText(tarih);
+            });
+        });
+
+
         //butona basınca switchin son durumunu öğrenmek için , toggleButonun seçilenin ne olduğunu gösteren kod
         binding.button4.setOnClickListener(view -> {
             Log.e("sonuç","Switch Durum : "+ binding.switch1.isChecked());
@@ -95,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
 
             String ulke = binding.autoCompleteTextView.getText().toString();
             Log.e("sonuç","ülke durumu : "+ulke);
+
+            Log.e("sonuç","Seekbar durumu"+binding.seekBar.getProgress());
+
         });
 
     }
